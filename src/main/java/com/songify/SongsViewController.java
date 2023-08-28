@@ -14,7 +14,7 @@ public class SongsViewController {
         return "home";
     }
     @GetMapping("/view/songs")
-    public String songs(Medel model){
+    public String songs(Model model){
         database.put(1, "shawnmendes song1");
         database.put(2, "metallica one");
         database.put(3, "sting two");
