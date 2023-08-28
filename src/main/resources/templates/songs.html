@@ -6,10 +6,10 @@
 
 <body>
 <h2>Song List</h2>
-<ul>
+<ol>
     <li th:each="entry : ${songMap}">
         <span th:text="'Song ' + ${entry.key} + ': ' + ${entry.value}"></span>
     </li>
-</ul>
+</ol>
 </body>
 </html>
