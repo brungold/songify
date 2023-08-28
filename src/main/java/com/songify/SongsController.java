@@ -46,4 +46,8 @@ public class SongsController {
         SingleSongResponseDto response = new SingleSongResponseDto(song);
         return ResponseEntity.ok(response);
     }
+    @PostMapping
+    public ResponseEntity<SingleSongResponseDto> postSong(@RequestBody SongRequestDto request){
+
+    }
 }
