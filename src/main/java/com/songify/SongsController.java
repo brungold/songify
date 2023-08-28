@@ -16,7 +16,7 @@ public class SongsController {
             1, "shawnmendes song1",
         2, "metallica one",
         3, "sting two",
-        4, "barnaba three",
+        4, "barnaba three"
     ));
     //GET /songs + GET query Param /songs?id=100
     @GetMapping("/songs")
