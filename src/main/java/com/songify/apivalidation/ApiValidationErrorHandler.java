@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ApiValidationErrorHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public String handleValidationException(MethodArgumentNotValidException exception){
+    public ApiValidationErrorResponseDto handleValidationException(MethodArgumentNotValidException exception){
         String message = exception.getMessage();
-        return "handled exception";
+        return new ApiValidationErrorResponseDto("handled exception");
     }
 }
