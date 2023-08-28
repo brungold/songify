@@ -1,4 +1,6 @@
 package com.songify.apivalidation;
 
-public record ApiValidationErrorResponseDto(String name) {
+import java.util.List;
+
+public record ApiValidationErrorResponseDto(List<String> errors) {
 }
