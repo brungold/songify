@@ -20,6 +20,7 @@ public class SongsViewController {
         database.put(3, "sting two");
         database.put(4, "barnaba three");
 
+        model.addAttribute("songMap", database);
         return "songs";
     }
 }
