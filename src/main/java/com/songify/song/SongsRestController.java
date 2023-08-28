@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @Log4j2
-public class SongsController {
+public class SongsRestController {
     Map<Integer, String> database = new HashMap<>(Map.of(
             1, "shawnmendes song1",
         2, "metallica one",
