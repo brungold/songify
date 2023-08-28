@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class SongsViewController {
     @GetMapping("/")
     public String home(){
-        return "home.html";
+        return "home";
+    }
+    @GetMapping("/view/songs")
+    public String songs(){
+        return "songs";
     }
 }
