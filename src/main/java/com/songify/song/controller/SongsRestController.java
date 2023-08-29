@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @Log4j2
 public class SongsRestController {
     Map<Integer, String> database = new HashMap<>(Map.of(
-            1, "shawnmendes song1",
+            1, new SongEntity("song1", "Shawn Mendes"),
         2, "metallica one",
         3, "sting two",
         4, "barnaba three"
