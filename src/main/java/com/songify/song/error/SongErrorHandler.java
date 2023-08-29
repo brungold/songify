@@ -1,4 +1,4 @@
-package com.songify.song;
+package com.songify.song.error;
 
 public class SongErrorHandler {
 }
