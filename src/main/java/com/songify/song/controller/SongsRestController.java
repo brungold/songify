@@ -71,7 +71,8 @@ public class SongsRestController {
     }
 
     @PutMapping("/songs/{id}")
-    public ResponseEntity<UpdateSongResponseDto> update(@PathVariable Integer id, @RequestBody UpdateSongRequestDto request){
+    public ResponseEntity<UpdateSongResponseDto> update(@PathVariable Integer id,
+                                                        @RequestBody @Valid UpdateSongRequestDto request){
         if(!database.containsKey(id)){
             throw new SongNotFoundException("Song with id " + id + " not found");
         }
