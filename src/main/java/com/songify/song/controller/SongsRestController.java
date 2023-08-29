@@ -49,6 +49,7 @@ public class SongsRestController {
         SingleSongResponseDto response = new SingleSongResponseDto(song);
         return ResponseEntity.ok(response);
     }
+
     @PostMapping("/songs")
     public ResponseEntity<SingleSongResponseDto> postSong(@RequestBody @Valid SongRequestDto request){
         String songName = request.songName();
@@ -56,6 +57,7 @@ public class SongsRestController {
         database.put(database.size() + 1, songName);
         return ResponseEntity.ok(new SingleSongResponseDto(songName));
     }
+
     @DeleteMapping("/songs/{id}")
     public ResponseEntity<DeleteSongResponseDto> deleteSongByIdUsingPathVariable(@PathVariable Integer id){
         if(!database.containsKey(id)){
@@ -64,4 +66,7 @@ public class SongsRestController {
         database.remove(id);
         return ResponseEntity.ok(new DeleteSongResponseDto("you deleted song with id: " + id, HttpStatus.OK));
     }
+
+    @PutMapping("/songs/{id}")
+    public ResponseEntity<UpdateSongResponseDto>
 }
