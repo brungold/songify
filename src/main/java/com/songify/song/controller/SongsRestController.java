@@ -73,7 +73,13 @@ public class SongsRestController {
     }
 
     @PutMapping("/songs/{id}")
-    public ResponseEntity<UpdateSongResponseDto> update(@PathVariable Integer id, @ResponseBody UpdateSongRequestDto request){
-
+    public ResponseEntity<UpdateSongResponseDto> update(@PathVariable Integer id, @RequestBody UpdateSongRequestDto request){
+        if(!database.containsKey(id)){
+            throw new SongNotFoundException("Song with id " + id + " not found");
+        }
+        String newSongName = request.songName();
+        String oldSongName = database.put(id, newSongName);
+        log.info("Updated song with id: " + id + " with oldSongName: " + oldSongName + " to newSongName: " + newSongName);
+        return ResponseEntity.ok(new UpdateSongResponseDto(newSongName));
     }
 }
