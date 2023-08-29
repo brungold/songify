@@ -1,7 +1,12 @@
 package com.songify.song.controller;
 
+import com.songify.song.dto.request.SongRequestDto;
+import com.songify.song.dto.request.UpdateSongRequestDto;
+import com.songify.song.dto.response.DeleteSongResponseDto;
+import com.songify.song.dto.response.SingleSongResponseDto;
+import com.songify.song.dto.response.SongResponseDto;
+import com.songify.song.dto.response.UpdateSongResponseDto;
 import com.songify.song.error.SongNotFoundException;
-import com.songify.song.dto.*;
 import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -68,5 +73,7 @@ public class SongsRestController {
     }
 
     @PutMapping("/songs/{id}")
-    public ResponseEntity<UpdateSongResponseDto>
+    public ResponseEntity<UpdateSongResponseDto> update(@PathVariable Integer id, @ResponseBody UpdateSongRequestDto request){
+
+    }
 }
