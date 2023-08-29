@@ -1,6 +1,5 @@
 package com.songify.song.controller;
 
-import com.songify.song.error.ErrorDeleteSongResponseDto;
 import com.songify.song.error.SongNotFoundException;
 import com.songify.song.dto.*;
 import jakarta.validation.Valid;
@@ -43,10 +42,10 @@ public class SongsRestController {
     @GetMapping("/songs/{id}")
     public ResponseEntity<SingleSongResponseDto> getSongById(@PathVariable Integer id, @RequestHeader(required = false) String requestId){
         log.info(requestId);
-        String song = database.get(id);
-        if(song == null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        if(!database.containsKey(id)){
+            throw new SongNotFoundException("Song with id " + id + " not found");
         }
+        String song = database.get(id);
         SingleSongResponseDto response = new SingleSongResponseDto(song);
         return ResponseEntity.ok(response);
     }
