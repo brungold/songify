@@ -1,5 +1,6 @@
 package com.songify.song.controller;
 
+import com.songify.song.dto.request.PartiallyUpdateSongRequestDto;
 import com.songify.song.dto.request.SongRequestDto;
 import com.songify.song.dto.request.UpdateSongRequestDto;
 import com.songify.song.dto.response.*;
@@ -84,5 +85,10 @@ public class SongsRestController {
         return ResponseEntity.ok(new UpdateSongResponseDto(newSong.songName(), newSong.artist()));
     }
     @PatchMapping("/songs/{id}")
-    public ResponseEntity<PartiallyUpdateSongResponseDto>
+    public ResponseEntity<PartiallyUpdateSongResponseDto> partiallyUpdateSong(@PathVariable Integer id,
+                                                                              @RequestBody PartiallyUpdateSongRequestDto request){
+        if(!database.containsKey(id)){
+            throw new SongNotFoundException("Song with id " + id + " not found");
+        }
+    }
 }
