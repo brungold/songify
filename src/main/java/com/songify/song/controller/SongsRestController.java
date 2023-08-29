@@ -80,8 +80,8 @@ public class SongsRestController {
         Song newSong = new Song(newSongName, newArtist);
         Song oldSong = database.put(id, newSong);
         log.info("Updated song with id: " + id +
-                " with oldSongName: " + oldSong.name() + " to newSongName: " + newSong.name() +
+                " with oldSongName: " + oldSong.songName() + " to newSongName: " + newSong.songName() +
                 " oldArtist: " + oldSong.artist() + " to newArtist: " + newSong.artist());
-        return ResponseEntity.ok(new UpdateSongResponseDto(newSongName));
+        return ResponseEntity.ok(new UpdateSongResponseDto(newSong.songName(), newSong.artist()));
     }
 }
