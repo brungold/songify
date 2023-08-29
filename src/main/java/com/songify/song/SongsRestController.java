@@ -57,8 +57,8 @@ public class SongsRestController {
     @DeleteMapping("/songs/{id}")
     public ResponseEntity<DeleteSongResponseDto> deleteSongByIdUsingPathVariable(@PathVariable Integer id){
         if(!database.containsKey(id)){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(new DeleteSongResponseDto("Song with id " + id + " not found", HttpStatus.NOT_FOUND));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND) // status odpowiedzi a poniżej status w CIELE odpowiedzi!!!
+                    .body(new ErrorDeleteSongResponseDto("Song with id " + id + " not found", HttpStatus.NOT_FOUND));
         }
         database.remove(id);
         return ResponseEntity.ok(new DeleteSongResponseDto("you deleted song with id: " + id, HttpStatus.OK));
