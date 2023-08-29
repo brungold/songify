@@ -1,4 +1,4 @@
-package com.songify.song.controller;
+package com.songify.song.error;
 
 public class SongNotFoundException extends RuntimeException {
     //RuntimeException klasa nadrzedna. Runtime jest zbyt odgólne

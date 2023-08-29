@@ -1,6 +1,7 @@
-package com.songify.song.error;
+package com.songify.song.controller;
 
-import com.songify.song.controller.SongNotFoundException;
+import com.songify.song.error.ErrorDeleteSongResponseDto;
+import com.songify.song.error.SongNotFoundException;
 import com.songify.song.dto.*;
 import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
