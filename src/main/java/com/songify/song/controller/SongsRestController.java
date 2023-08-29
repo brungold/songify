@@ -109,6 +109,6 @@ public class SongsRestController {
         }
         Song updatedSong = builder.build();
         database.put(id, updatedSong);
-        return ResponseEntity.ok(new PartiallyUpdateSongResponseDto("success"));
+        return ResponseEntity.ok(new PartiallyUpdateSongResponseDto(updatedSong));
     }
 }
