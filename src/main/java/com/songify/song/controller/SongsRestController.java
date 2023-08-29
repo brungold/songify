@@ -2,10 +2,7 @@ package com.songify.song.controller;
 
 import com.songify.song.dto.request.SongRequestDto;
 import com.songify.song.dto.request.UpdateSongRequestDto;
-import com.songify.song.dto.response.DeleteSongResponseDto;
-import com.songify.song.dto.response.SingleSongResponseDto;
-import com.songify.song.dto.response.SongResponseDto;
-import com.songify.song.dto.response.UpdateSongResponseDto;
+import com.songify.song.dto.response.*;
 import com.songify.song.error.SongNotFoundException;
 import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
@@ -86,4 +83,6 @@ public class SongsRestController {
                 " oldArtist: " + oldSong.artist() + " to newArtist: " + newSong.artist());
         return ResponseEntity.ok(new UpdateSongResponseDto(newSong.songName(), newSong.artist()));
     }
+    @PatchMapping("/songs/{id}")
+    public ResponseEntity<PartiallyUpdateSongResponseDto>
 }
