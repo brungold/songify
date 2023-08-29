@@ -1,7 +1,7 @@
 package com.songify.song.controller;
 
 import com.songify.song.dto.request.PartiallyUpdateSongRequestDto;
-import com.songify.song.dto.request.SongRequestDto;
+import com.songify.song.dto.request.CreateSongRequestDto;
 import com.songify.song.dto.request.UpdateSongRequestDto;
 import com.songify.song.dto.response.*;
 import com.songify.song.error.SongNotFoundException;
@@ -28,39 +28,39 @@ public class SongsRestController {
 
     //GET /songs + GET query Param /songs?id=100
     @GetMapping
-    public ResponseEntity<SongResponseDto> getAllSongs(@RequestParam(required = false) Integer limit) {
+    public ResponseEntity<GetAllSongsResponseDto> getAllSongs(@RequestParam(required = false) Integer limit) {
         if (limit != null) {
             Map<Integer, Song> limitedMap = database.entrySet()
                     .stream()
                     .limit(limit)
                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-            SongResponseDto response = new SongResponseDto(limitedMap);
+            GetAllSongsResponseDto response = new GetAllSongsResponseDto(limitedMap);
             return ResponseEntity.ok(response);
         }
-        SongResponseDto response = new SongResponseDto(database);
+        GetAllSongsResponseDto response = new GetAllSongsResponseDto(database);
         return ResponseEntity.ok(response);
 
     }
 
     //GET /songs?id=100
     @GetMapping("/{id}")
-    public ResponseEntity<SingleSongResponseDto> getSongById(@PathVariable Integer id,
+    public ResponseEntity<GetSongResponseDto> getSongById(@PathVariable Integer id,
                                                              @RequestHeader(required = false) String requestId) {
         log.info(requestId);
         if (!database.containsKey(id)) {
             throw new SongNotFoundException("Song with id " + id + " not found");
         }
         Song song = database.get(id);
-        SingleSongResponseDto response = new SingleSongResponseDto(song);
+        GetSongResponseDto response = new GetSongResponseDto(song);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping
-    public ResponseEntity<SingleSongResponseDto> postSong(@RequestBody @Valid SongRequestDto request) {
+    public ResponseEntity<CreateSongResponseDto> postSong(@RequestBody @Valid CreateSongRequestDto request) {
         Song song = new Song(request.songName(), request.artist());
         log.info("adding new song: " + song);
         database.put(database.size() + 1, song);
-        return ResponseEntity.ok(new SingleSongResponseDto(song));
+        return ResponseEntity.ok(new CreateSongResponseDto(song));
     }
 
     @DeleteMapping("/{id}")
