@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @Log4j2
+@RequestMapping("/songs")
 public class SongsRestController {
     Map<Integer, Song> database = new HashMap<>(Map.of(
             1, new Song("song1", "Shawn Mendes"),
@@ -26,7 +27,7 @@ public class SongsRestController {
     ));
 
     //GET /songs + GET query Param /songs?id=100
-    @GetMapping("/songs")
+    @GetMapping
     public ResponseEntity<SongResponseDto> getAllSongs(@RequestParam(required = false) Integer limit) {
         if (limit != null) {
             Map<Integer, Song> limitedMap = database.entrySet()
@@ -42,7 +43,7 @@ public class SongsRestController {
     }
 
     //GET /songs?id=100
-    @GetMapping("/songs/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<SingleSongResponseDto> getSongById(@PathVariable Integer id,
                                                              @RequestHeader(required = false) String requestId) {
         log.info(requestId);
@@ -54,7 +55,7 @@ public class SongsRestController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/songs")
+    @PostMapping
     public ResponseEntity<SingleSongResponseDto> postSong(@RequestBody @Valid SongRequestDto request) {
         Song song = new Song(request.songName(), request.artist());
         log.info("adding new song: " + song);
@@ -62,7 +63,7 @@ public class SongsRestController {
         return ResponseEntity.ok(new SingleSongResponseDto(song));
     }
 
-    @DeleteMapping("/songs/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<DeleteSongResponseDto> deleteSongByIdUsingPathVariable(@PathVariable Integer id) {
         if (!database.containsKey(id)) {
             throw new SongNotFoundException("Song with id " + id + " not found");
@@ -71,7 +72,7 @@ public class SongsRestController {
         return ResponseEntity.ok(new DeleteSongResponseDto("you deleted song with id: " + id, HttpStatus.OK));
     }
 
-    @PutMapping("/songs/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<UpdateSongResponseDto> update(@PathVariable Integer id,
                                                         @RequestBody @Valid UpdateSongRequestDto request) {
         if (!database.containsKey(id)) {
@@ -87,7 +88,7 @@ public class SongsRestController {
         return ResponseEntity.ok(new UpdateSongResponseDto(newSong.name(), newSong.artist()));
     }
 
-    @PatchMapping("/songs/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<PartiallyUpdateSongResponseDto> partiallyUpdateSong(@PathVariable Integer id,
                                                                               @RequestBody PartiallyUpdateSongRequestDto request) {
         if (!database.containsKey(id)) {
