@@ -1,10 +1,11 @@
-package com.songify.song.controller;
+package com.songify.song.infructure.controller;
 
-import com.songify.song.dto.request.PartiallyUpdateSongRequestDto;
-import com.songify.song.dto.request.CreateSongRequestDto;
-import com.songify.song.dto.request.UpdateSongRequestDto;
-import com.songify.song.dto.response.*;
-import com.songify.song.error.SongNotFoundException;
+import com.songify.song.infructure.controller.dto.request.PartiallyUpdateSongRequestDto;
+import com.songify.song.infructure.controller.dto.request.CreateSongRequestDto;
+import com.songify.song.infructure.controller.dto.request.UpdateSongRequestDto;
+import com.songify.song.domain.model.SongNotFoundException;
+import com.songify.song.domain.model.Song;
+import com.songify.song.infructure.controller.dto.response.*;
 import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -45,7 +46,7 @@ public class SongsRestController {
     //GET /songs?id=100
     @GetMapping("/{id}")
     public ResponseEntity<GetSongResponseDto> getSongById(@PathVariable Integer id,
-                                                             @RequestHeader(required = false) String requestId) {
+                                                          @RequestHeader(required = false) String requestId) {
         log.info(requestId);
         if (!database.containsKey(id)) {
             throw new SongNotFoundException("Song with id " + id + " not found");

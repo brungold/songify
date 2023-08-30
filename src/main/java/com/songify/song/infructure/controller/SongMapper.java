@@ -1,7 +1,8 @@
-package com.songify.song.controller;
+package com.songify.song.infructure.controller;
 
-import com.songify.song.dto.request.CreateSongRequestDto;
-import com.songify.song.dto.response.CreateSongResponseDto;
+import com.songify.song.infructure.controller.dto.request.CreateSongRequestDto;
+import com.songify.song.infructure.controller.dto.response.CreateSongResponseDto;
+import com.songify.song.domain.model.Song;
 
 //Tzw klasa utilowa (narzędziowa), nie mam mieć żadnej logiki tylko robić prostą
 //logikę przepakowania z jednego obiektu na drugi
