@@ -57,11 +57,14 @@ public class SongsRestController {
 
     @PostMapping
     public ResponseEntity<CreateSongResponseDto> postSong(@RequestBody @Valid CreateSongRequestDto request) {
-        Song song = new Song(request.songName(), request.artist());
+        Song song = SongMapper.mapFromCreateSongRequestDtoToSong(request);
         log.info("adding new song: " + song);
         database.put(database.size() + 1, song);
-        return ResponseEntity.ok(new CreateSongResponseDto(song));
+        CreateSongResponseDto body = new CreateSongResponseDto(song);
+        return ResponseEntity.ok(body);
     }
+
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<DeleteSongResponseDto> deleteSongByIdUsingPathVariable(@PathVariable Integer id) {
