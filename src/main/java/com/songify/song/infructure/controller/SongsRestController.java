@@ -107,7 +107,7 @@ public class SongsRestController {
         }
         Song songFromDatabase = database.get(id);
         Song updatedSong = SongMapper.mapFromPartiallyUpdateSongRequestDtoToSong(request);
-        Song.SongBuilder builder = Song.builder();
+        Song.SongBuilder builder = Song.builder(); // gdzie zwieńczene build ??
         if (request.songName() != null) {
             builder.name(updatedSong.name());
             log.info("partially updated songName");
@@ -122,6 +122,6 @@ public class SongsRestController {
         }
         database.put(id, updatedSong);
         PartiallyUpdateSongResponseDto body = SongMapper.mapFromSongToPartiallyUpdateSongResponseDto(updatedSong);
-        return ResponseEntity.ok(new PartiallyUpdateSongResponseDto(updatedSong));
+        return ResponseEntity.ok(body);
     }
 }
