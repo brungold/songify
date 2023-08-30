@@ -60,7 +60,7 @@ public class SongsRestController {
         Song song = SongMapper.mapFromCreateSongRequestDtoToSong(request);
         log.info("adding new song: " + song);
         database.put(database.size() + 1, song);
-        CreateSongResponseDto body = new CreateSongResponseDto(song);
+        CreateSongResponseDto body = SongMapper.mapFromSongToCreateSongResponseDto(song);
         return ResponseEntity.ok(body);
     }
 
