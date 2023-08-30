@@ -52,9 +52,11 @@ public class SongsRestController {
             throw new SongNotFoundException("Song with id " + id + " not found");
         }
         Song song = database.get(id);
-        GetSongResponseDto response = new GetSongResponseDto(song);
+        GetSongResponseDto response = SongMapper.mapFromSongToGetSongResponseDto(song);
         return ResponseEntity.ok(response);
     }
+
+
 
     @PostMapping
     public ResponseEntity<CreateSongResponseDto> postSong(@RequestBody @Valid CreateSongRequestDto request) {
@@ -73,8 +75,10 @@ public class SongsRestController {
             throw new SongNotFoundException("Song with id " + id + " not found");
         }
         database.remove(id);
-        return ResponseEntity.ok(new DeleteSongResponseDto("you deleted song with id: " + id, HttpStatus.OK));
+        DeleteSongResponseDto body = SongMapper.mapFromSongToDeleteSongResponseDto(id);
+        return ResponseEntity.ok(body);
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<UpdateSongResponseDto> update(@PathVariable Integer id,
