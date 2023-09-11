@@ -5,12 +5,19 @@ The project follows a layered architecture, including controller, service, and d
 Technologies used in the project include:
 
 -Java 17
+
 -Lombok
+
 -Spring Boot: A Java framework for creating web applications.
+
 -Maven: Dependency management and project build tool.
+
 -Spring Web: A Spring Boot starter for building web applications.
+
 -Springdoc OpenAPI: A starter for generating API documentation based on OpenAPI (formerly Swagger).
+
 -Spring Boot Starter Thymeleaf: A Thymeleaf starter for creating HTML views.
+
 -Spring Boot Starter Validation: A starter for handling data validation.
 
 The "songify" project provides HTTP methods such as GET, POST, PUT, DELETE, and PATCH for performing operations on songs.
