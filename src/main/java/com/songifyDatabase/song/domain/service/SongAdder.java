@@ -2,6 +2,7 @@ package com.songifyDatabase.song.domain.service;
 
 import com.songifyDatabase.song.domain.model.Song;
 import com.songifyDatabase.song.domain.repository.SongRepository;
+import com.songifyDatabase.song.domain.repository.SongRepositoryInMemory;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ public class SongAdder {
 
     public Song addSong(Song song) {
         log.info("adding new song: " + song);
-        songRepository.saveToDatabase(song);
+        songRepository.save(song);
         return song;
     }
 }
