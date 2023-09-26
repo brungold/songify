@@ -94,8 +94,8 @@ public class SongsRestController {
         Song newSong = SongMapper.mapFromUpdateSongRequestDtoToSong(request);
         Song oldSong = songAdder.addSong(newSong);
         log.info("Updated songName with id: " + id +
-                " with oldSongName: " + oldSong.name() + " to newSongName: " + newSong.name() +
-                " oldArtist: " + oldSong.artist() + " to newArtist: " + newSong.artist());
+                " with oldSongName: " + oldSong.getName() + " to newSongName: " + newSong.getName() +
+                " oldArtist: " + oldSong.getArtist() + " to newArtist: " + newSong.getArtist());
         UpdateSongResponseDto body = SongMapper.mapFromSongToUpdateSongResponseDto(newSong);
         return ResponseEntity.ok((body));
     }
@@ -114,16 +114,16 @@ public class SongsRestController {
         Song updatedSong = SongMapper.mapFromPartiallyUpdateSongRequestDtoToSong(request);
         Song.SongBuilder builder = Song.builder(); // gdzie zwieńczene build ??
         if (request.songName() != null) {
-            builder.name(updatedSong.name());
+            builder.name(updatedSong.getName());
             log.info("partially updated songName");
         } else {
-            builder.name(songFromDatabase.name());
+            builder.name(songFromDatabase.getName());
         }
         if (request.artist() != null) {
-            builder.artist(updatedSong.artist());
+            builder.artist(updatedSong.getArtist());
             log.info("partially updated artist");
         } else {
-            builder.artist(songFromDatabase.artist());
+            builder.artist(songFromDatabase.getArtist());
         }
         songAdder.addSong(updatedSong);
         PartiallyUpdateSongResponseDto body = SongMapper.mapFromSongToPartiallyUpdateSongResponseDto(updatedSong);
