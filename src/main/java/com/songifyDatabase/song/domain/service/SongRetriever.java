@@ -27,7 +27,7 @@ public class SongRetriever {
                 .toList();
     }
 
-    public Optional<Song> findSongById(Integer id) {
+    public Optional<Song> findSongById(Long id) {
         return songRepository.findById(id);
     }
 }
