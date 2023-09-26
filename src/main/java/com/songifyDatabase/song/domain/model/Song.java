@@ -17,8 +17,10 @@ public class Song {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(nullable = false)
     String name;
 
+    @Column(nullable = false)
     String artist;
 
     public Song() {
