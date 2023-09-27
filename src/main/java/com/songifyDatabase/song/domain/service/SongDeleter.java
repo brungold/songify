@@ -16,7 +16,7 @@ public class SongDeleter {
     }
 
     public void deleteById(Long id) {
-        songRetriever.findSongById(id);
+        songRetriever.existsById(id);
         log.info("deleting song by id: " + id);
         songRepository.deleteById(id);
     }
