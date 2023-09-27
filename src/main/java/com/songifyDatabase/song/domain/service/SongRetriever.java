@@ -22,6 +22,7 @@ public class SongRetriever {
         log.info("retrieving all sons: ");
         return songRepository.findAll();
     }
+
     public List<Song> findAllLimitedBy(Integer limit) {
         return songRepository.findAll()
                 .stream().limit(limit)
@@ -32,7 +33,7 @@ public class SongRetriever {
         return songRepository.findById(id);
     }
 
-    public void existsById(Long id){
+    public void existsById(Long id) {
         findSongById(id)
                 .orElseThrow(() -> new SongNotFoundException("Song with id " + id + " not found"));
     }

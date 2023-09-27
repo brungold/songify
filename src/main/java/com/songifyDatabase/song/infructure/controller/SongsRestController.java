@@ -3,6 +3,7 @@ package com.songifyDatabase.song.infructure.controller;
 import com.songifyDatabase.song.domain.service.SongAdder;
 import com.songifyDatabase.song.domain.service.SongRetriever;
 import com.songifyDatabase.song.domain.service.SongDeleter;
+import com.songifyDatabase.song.domain.service.SongUpdater;
 import com.songifyDatabase.song.infructure.controller.dto.request.PartiallyUpdateSongRequestDto;
 import com.songifyDatabase.song.infructure.controller.dto.request.CreateSongRequestDto;
 import com.songifyDatabase.song.infructure.controller.dto.request.UpdateSongRequestDto;
@@ -27,6 +28,7 @@ public class SongsRestController {
     private final SongAdder songAdder;
     private final SongRetriever songRetriever;
     private final SongDeleter songDeleter;
+    private final SongUpdater songUpdater;
 
 
     //GET /songs + GET query Param /songs?id=100
@@ -83,23 +85,14 @@ public class SongsRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UpdateSongResponseDto> update(@PathVariable Integer id,
+    public ResponseEntity<UpdateSongResponseDto> update(@PathVariable Long id,
                                                         @RequestBody @Valid UpdateSongRequestDto request) {
-        List<Song> allSongs = songRetriever.findAll();
-        if (!allSongs.contains(id)) {
-            throw new SongNotFoundException("Song with id " + id + " not found");
-        }
-
+        songRetriever.existsById(id);
         Song newSong = SongMapper.mapFromUpdateSongRequestDtoToSong(request);
-        Song oldSong = songAdder.addSong(newSong);
-        log.info("Updated songName with id: " + id +
-                " with oldSongName: " + oldSong.getName() + " to newSongName: " + newSong.getName() +
-                " oldArtist: " + oldSong.getArtist() + " to newArtist: " + newSong.getArtist());
+        songUpdater.updateById(id, newSong);
         UpdateSongResponseDto body = SongMapper.mapFromSongToUpdateSongResponseDto(newSong);
         return ResponseEntity.ok((body));
     }
-
-
 
 
     @PatchMapping("/{id}")
