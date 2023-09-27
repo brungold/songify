@@ -2,6 +2,7 @@ package com.songifyDatabase.song.infructure.controller;
 
 import com.songifyDatabase.song.domain.service.SongAdder;
 import com.songifyDatabase.song.domain.service.SongRetriever;
+import com.songifyDatabase.song.domain.service.SongDeleter;
 import com.songifyDatabase.song.infructure.controller.dto.request.PartiallyUpdateSongRequestDto;
 import com.songifyDatabase.song.infructure.controller.dto.request.CreateSongRequestDto;
 import com.songifyDatabase.song.infructure.controller.dto.request.UpdateSongRequestDto;
@@ -9,27 +10,23 @@ import com.songifyDatabase.song.domain.model.SongNotFoundException;
 import com.songifyDatabase.song.domain.model.Song;
 import com.songifyDatabase.song.infructure.controller.dto.response.*;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 
 @RestController
 @Log4j2
 @RequestMapping("/songs")
+@AllArgsConstructor
 public class SongsRestController {
 
     private final SongAdder songAdder;
     private final SongRetriever songRetriever;
-
-    public SongsRestController(SongAdder songAdder, SongRetriever songRetriever) {
-        this.songAdder = songAdder;
-        this.songRetriever = songRetriever;
-    }
+    private final SongDeleter songDeleter;
 
 
     //GET /songs + GET query Param /songs?id=100
@@ -45,7 +42,6 @@ public class SongsRestController {
         return ResponseEntity.ok(response);
 
     }
-
 
     //GET /songs?id=100
     @GetMapping("/{id}")
@@ -65,8 +61,6 @@ public class SongsRestController {
         return ResponseEntity.ok(response);
     }
 
-
-
     @PostMapping
     public ResponseEntity<CreateSongResponseDto> postSong(@RequestBody @Valid CreateSongRequestDto request) {
         Song song = SongMapper.mapFromCreateSongRequestDtoToSong(request);
@@ -75,19 +69,18 @@ public class SongsRestController {
         return ResponseEntity.ok(body);
     }
 
-
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<DeleteSongResponseDto> deleteSongByIdUsingPathVariable(@PathVariable Integer id) {
-        List<Song> allSongs = songRetriever.findAll();
-        if (!allSongs.contains(id)) {
-            throw new SongNotFoundException("Song with id " + id + " not found");
-        }
-        allSongs.remove(id);
+    public ResponseEntity<DeleteSongResponseDto> deleteSongByIdUsingPathVariable(@PathVariable Long id) {
+//        List<Song> allSongs = songRetriever.findAll();
+//        if (!allSongs.contains(id)) {
+//            throw new SongNotFoundException("Song with id " + id + " not found");
+//        }
+//        allSongs.remove(id);
+        songRetriever.existsById(id);
+        songDeleter.deleteById(id);
         DeleteSongResponseDto body = SongMapper.mapFromSongToDeleteSongResponseDto(id);
         return ResponseEntity.ok(body);
     }
-
 
     @PutMapping("/{id}")
     public ResponseEntity<UpdateSongResponseDto> update(@PathVariable Integer id,
