@@ -7,12 +7,13 @@ import com.songifyDatabase.song.domain.service.SongUpdater;
 import com.songifyDatabase.song.infructure.controller.dto.request.PartiallyUpdateSongRequestDto;
 import com.songifyDatabase.song.infructure.controller.dto.request.CreateSongRequestDto;
 import com.songifyDatabase.song.infructure.controller.dto.request.UpdateSongRequestDto;
-import com.songifyDatabase.song.domain.model.SongNotFoundException;
 import com.songifyDatabase.song.domain.model.Song;
 import com.songifyDatabase.song.infructure.controller.dto.response.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,16 +34,10 @@ public class SongsRestController {
 
     //GET /songs + GET query Param /songs?id=100
     @GetMapping
-    public ResponseEntity<GetAllSongsResponseDto> getAllSongs(@RequestParam(required = false) Integer limit) {
-        List<Song> allSongs = songRetriever.findAll();
-        if (limit != null) {
-            List<Song> limitedMap = songRetriever.findAllLimitedBy(limit);
-            GetAllSongsResponseDto response = new GetAllSongsResponseDto(limitedMap);
-            return ResponseEntity.ok(response);
-        }
+    public ResponseEntity<GetAllSongsResponseDto> getAllSongs(@PageableDefault(page = 0, size = 10) Pageable pageable) {
+        List<Song> allSongs = songRetriever.findAll(pageable);
         GetAllSongsResponseDto response = SongMapper.mapFromSongToGetAllSongsResponseDto(allSongs);
         return ResponseEntity.ok(response);
-
     }
 
     //GET /songs?id=100
