@@ -1,6 +1,4 @@
 package com.songifyDatabase.song.infructure.controller.dto.response;
 
-import com.songifyDatabase.song.domain.model.Song;
-
-public record PartiallyUpdateSongResponseDto(Song updatedSong) {
+public record PartiallyUpdateSongResponseDto(SongDto updatedSong) {
 }
