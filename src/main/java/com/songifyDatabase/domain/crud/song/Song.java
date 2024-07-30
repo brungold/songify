@@ -50,8 +50,7 @@ class Song extends BaseEntity {
     private SongLanguage language;
 
 
-    public Song(String name, String artist) {
+    public Song(String name) {
         this.name = name;
-        this.artist = artist;
     }
 }

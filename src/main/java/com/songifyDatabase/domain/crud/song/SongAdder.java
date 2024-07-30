@@ -16,12 +16,10 @@ class SongAdder {
     private final SongRepository songRepository;
 
 
-    Song addSong(final Song song, final Long genreId, final SongLanguage songLanguageDatabase) {
+    Song addSong(final Song song) {
         log.info("adding new song: " + song);
         song.setDuration(200L);
         song.setReleaseDate(Instant.now());
-        song.setGenreId(genreId);
-        song.setLanguage(songLanguageDatabase);
         return songRepository.save(song);
     }
 }

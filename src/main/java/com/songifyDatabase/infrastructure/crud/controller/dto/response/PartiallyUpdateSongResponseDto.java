@@ -1,4 +1,6 @@
 package com.songifyDatabase.infrastructure.crud.controller.dto.response;
 
-public record PartiallyUpdateSongResponseDto(SongControllerResponseDto updatedSong) {
+import com.songifyDatabase.domain.crud.song.dto.SongDto;
+
+public record PartiallyUpdateSongResponseDto(SongDto updatedSong) {
 }

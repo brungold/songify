@@ -1,4 +1,6 @@
 package com.songifyDatabase.infrastructure.crud.controller.dto.response;
 
-public record GetSongResponseDto(SongControllerResponseDto song) {
+import com.songifyDatabase.domain.crud.song.dto.SongDto;
+
+public record GetSongResponseDto(SongDto song) {
 }
