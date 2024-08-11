@@ -1,5 +1,6 @@
 package com.songifyDatabase.domain.crud.album;
 
+import com.songifyDatabase.domain.crud.util.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,7 +17,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @Getter(AccessLevel.PACKAGE)
 @Setter(AccessLevel.PACKAGE)
-class Album {
+class Album extends BaseEntity {
     @Id
     @GeneratedValue(generator = "album_id_seq", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(
