@@ -1,4 +1,4 @@
-package com.songifyDatabase.domain.crud.song;
+package com.songifyDatabase.domain.crud;
 
 import com.songifyDatabase.infrastructure.crud.controller.dto.request.CreateSongRequestDto;
 import com.songifyDatabase.infrastructure.crud.controller.dto.request.PartiallyUpdateSongRequestDto;

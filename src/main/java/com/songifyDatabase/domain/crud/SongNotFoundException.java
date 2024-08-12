@@ -1,4 +1,4 @@
-package com.songifyDatabase.domain.crud.song;
+package com.songifyDatabase.domain.crud;
 
 public class SongNotFoundException extends RuntimeException {
     //RuntimeException klasa nadrzedna. Runtime jest zbyt odgólne

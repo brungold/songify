@@ -1,7 +1,7 @@
 package com.songifyDatabase.infrastructure.crud.controller;
 
 
-import com.songifyDatabase.domain.crud.song.dto.SongDto;
+import com.songifyDatabase.domain.crud.dto.SongDto;
 import com.songifyDatabase.infrastructure.crud.controller.dto.request.CreateSongRequestDto;
 import com.songifyDatabase.infrastructure.crud.controller.dto.request.PartiallyUpdateSongRequestDto;
 import com.songifyDatabase.infrastructure.crud.controller.dto.request.UpdateSongRequestDto;
@@ -10,12 +10,10 @@ import com.songifyDatabase.infrastructure.crud.controller.dto.response.DeleteSon
 import com.songifyDatabase.infrastructure.crud.controller.dto.response.GetAllSongsResponseDto;
 import com.songifyDatabase.infrastructure.crud.controller.dto.response.GetSongResponseDto;
 import com.songifyDatabase.infrastructure.crud.controller.dto.response.PartiallyUpdateSongResponseDto;
-import com.songifyDatabase.infrastructure.crud.controller.dto.response.SongControllerResponseDto;
 import com.songifyDatabase.infrastructure.crud.controller.dto.response.UpdateSongResponseDto;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 public class SongControllerMapper {

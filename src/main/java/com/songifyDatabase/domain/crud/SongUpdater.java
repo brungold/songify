@@ -1,4 +1,4 @@
-package com.songifyDatabase.domain.crud.song;
+package com.songifyDatabase.domain.crud;
 
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;

@@ -1,7 +1,7 @@
 package com.songifyDatabase.infrastructure.crud.controller;
 
-import com.songifyDatabase.domain.crud.song.SongCrudFacade;
-import com.songifyDatabase.domain.crud.song.dto.SongDto;
+import com.songifyDatabase.domain.crud.SongCrudFacade;
+import com.songifyDatabase.domain.crud.dto.SongDto;
 import com.songifyDatabase.infrastructure.crud.controller.dto.request.CreateSongRequestDto;
 import com.songifyDatabase.infrastructure.crud.controller.dto.request.PartiallyUpdateSongRequestDto;
 import com.songifyDatabase.infrastructure.crud.controller.dto.request.UpdateSongRequestDto;
@@ -10,7 +10,6 @@ import com.songifyDatabase.infrastructure.crud.controller.dto.response.DeleteSon
 import com.songifyDatabase.infrastructure.crud.controller.dto.response.GetAllSongsResponseDto;
 import com.songifyDatabase.infrastructure.crud.controller.dto.response.GetSongResponseDto;
 import com.songifyDatabase.infrastructure.crud.controller.dto.response.PartiallyUpdateSongResponseDto;
-import com.songifyDatabase.infrastructure.crud.controller.dto.response.SongControllerResponseDto;
 import com.songifyDatabase.infrastructure.crud.controller.dto.response.UpdateSongResponseDto;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -31,15 +30,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static com.songifyDatabase.infrastructure.crud.controller.SongControllerMapper.mapFromCreateSongRequestDtoToSongDto;
-import static com.songifyDatabase.infrastructure.crud.controller.SongControllerMapper.mapFromPartiallyUpdateSongRequestDtoToSong;
-import static com.songifyDatabase.infrastructure.crud.controller.SongControllerMapper.mapFromSongDtoToPartiallyUpdateSongResponseDto;
 import static com.songifyDatabase.infrastructure.crud.controller.SongControllerMapper.mapFromSongToCreateSongResponseDto;
 import static com.songifyDatabase.infrastructure.crud.controller.SongControllerMapper.mapFromSongToDeleteSongResponseDto;
 import static com.songifyDatabase.infrastructure.crud.controller.SongControllerMapper.mapFromSongToGetAllSongsResponseDto;
 import static com.songifyDatabase.infrastructure.crud.controller.SongControllerMapper.mapFromSongToGetSongResponseDto;
 import static com.songifyDatabase.infrastructure.crud.controller.SongControllerMapper.mapFromSongToUpdateSongResponseDto;
-import static com.songifyDatabase.infrastructure.crud.controller.SongControllerMapper.mapFromUpdateSongRequestDtoToSongDto;
 
 
 @RestController
