@@ -27,5 +27,7 @@ class Genre extends BaseEntity {
 
     private String name;
 
-
+    Genre(final String name) {
+        this.name = name;
+    }
 }
