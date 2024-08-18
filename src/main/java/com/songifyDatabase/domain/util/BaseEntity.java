@@ -1,4 +1,4 @@
-package com.songifyDatabase.domain.crud.util;
+package com.songifyDatabase.domain.util;
 
 import jakarta.persistence.MappedSuperclass;
 import org.hibernate.annotations.CreationTimestamp;

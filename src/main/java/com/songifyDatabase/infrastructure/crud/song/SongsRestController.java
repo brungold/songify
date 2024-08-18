@@ -1,16 +1,16 @@
-package com.songifyDatabase.infrastructure.crud.controller;
+package com.songifyDatabase.infrastructure.crud.song;
 
-import com.songifyDatabase.domain.crud.SongCrudFacade;
+import com.songifyDatabase.domain.crud.SongifyCrudFacade;
 import com.songifyDatabase.domain.crud.dto.SongDto;
-import com.songifyDatabase.infrastructure.crud.controller.dto.request.CreateSongRequestDto;
-import com.songifyDatabase.infrastructure.crud.controller.dto.request.PartiallyUpdateSongRequestDto;
-import com.songifyDatabase.infrastructure.crud.controller.dto.request.UpdateSongRequestDto;
-import com.songifyDatabase.infrastructure.crud.controller.dto.response.CreateSongResponseDto;
-import com.songifyDatabase.infrastructure.crud.controller.dto.response.DeleteSongResponseDto;
-import com.songifyDatabase.infrastructure.crud.controller.dto.response.GetAllSongsResponseDto;
-import com.songifyDatabase.infrastructure.crud.controller.dto.response.GetSongResponseDto;
-import com.songifyDatabase.infrastructure.crud.controller.dto.response.PartiallyUpdateSongResponseDto;
-import com.songifyDatabase.infrastructure.crud.controller.dto.response.UpdateSongResponseDto;
+import com.songifyDatabase.infrastructure.crud.song.controller.dto.request.CreateSongRequestDto;
+import com.songifyDatabase.infrastructure.crud.song.controller.dto.request.PartiallyUpdateSongRequestDto;
+import com.songifyDatabase.infrastructure.crud.song.controller.dto.request.UpdateSongRequestDto;
+import com.songifyDatabase.infrastructure.crud.song.controller.dto.response.CreateSongResponseDto;
+import com.songifyDatabase.infrastructure.crud.song.controller.dto.response.DeleteSongResponseDto;
+import com.songifyDatabase.infrastructure.crud.song.controller.dto.response.GetAllSongsResponseDto;
+import com.songifyDatabase.infrastructure.crud.song.controller.dto.response.GetSongResponseDto;
+import com.songifyDatabase.infrastructure.crud.song.controller.dto.response.PartiallyUpdateSongResponseDto;
+import com.songifyDatabase.infrastructure.crud.song.controller.dto.response.UpdateSongResponseDto;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -30,11 +30,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static com.songifyDatabase.infrastructure.crud.controller.SongControllerMapper.mapFromSongToCreateSongResponseDto;
-import static com.songifyDatabase.infrastructure.crud.controller.SongControllerMapper.mapFromSongToDeleteSongResponseDto;
-import static com.songifyDatabase.infrastructure.crud.controller.SongControllerMapper.mapFromSongToGetAllSongsResponseDto;
-import static com.songifyDatabase.infrastructure.crud.controller.SongControllerMapper.mapFromSongToGetSongResponseDto;
-import static com.songifyDatabase.infrastructure.crud.controller.SongControllerMapper.mapFromSongToUpdateSongResponseDto;
+import static com.songifyDatabase.infrastructure.crud.song.SongControllerMapper.mapFromSongToCreateSongResponseDto;
+import static com.songifyDatabase.infrastructure.crud.song.SongControllerMapper.mapFromSongToDeleteSongResponseDto;
+import static com.songifyDatabase.infrastructure.crud.song.SongControllerMapper.mapFromSongToGetAllSongsResponseDto;
+import static com.songifyDatabase.infrastructure.crud.song.SongControllerMapper.mapFromSongToGetSongResponseDto;
+import static com.songifyDatabase.infrastructure.crud.song.SongControllerMapper.mapFromSongToUpdateSongResponseDto;
 
 
 @RestController
@@ -44,7 +44,7 @@ import static com.songifyDatabase.infrastructure.crud.controller.SongControllerM
 public class SongsRestController {
 
 
-    private final SongCrudFacade songFacade;
+    private final SongifyCrudFacade songFacade;
 
 
     //GET /songs + GET query Param /songs?id=100

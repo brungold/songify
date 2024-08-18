@@ -1,16 +1,16 @@
-package com.songifyDatabase.infrastructure.crud.controller;
+package com.songifyDatabase.infrastructure.crud.song;
 
 
 import com.songifyDatabase.domain.crud.dto.SongDto;
-import com.songifyDatabase.infrastructure.crud.controller.dto.request.CreateSongRequestDto;
-import com.songifyDatabase.infrastructure.crud.controller.dto.request.PartiallyUpdateSongRequestDto;
-import com.songifyDatabase.infrastructure.crud.controller.dto.request.UpdateSongRequestDto;
-import com.songifyDatabase.infrastructure.crud.controller.dto.response.CreateSongResponseDto;
-import com.songifyDatabase.infrastructure.crud.controller.dto.response.DeleteSongResponseDto;
-import com.songifyDatabase.infrastructure.crud.controller.dto.response.GetAllSongsResponseDto;
-import com.songifyDatabase.infrastructure.crud.controller.dto.response.GetSongResponseDto;
-import com.songifyDatabase.infrastructure.crud.controller.dto.response.PartiallyUpdateSongResponseDto;
-import com.songifyDatabase.infrastructure.crud.controller.dto.response.UpdateSongResponseDto;
+import com.songifyDatabase.infrastructure.crud.song.controller.dto.request.CreateSongRequestDto;
+import com.songifyDatabase.infrastructure.crud.song.controller.dto.request.PartiallyUpdateSongRequestDto;
+import com.songifyDatabase.infrastructure.crud.song.controller.dto.request.UpdateSongRequestDto;
+import com.songifyDatabase.infrastructure.crud.song.controller.dto.response.CreateSongResponseDto;
+import com.songifyDatabase.infrastructure.crud.song.controller.dto.response.DeleteSongResponseDto;
+import com.songifyDatabase.infrastructure.crud.song.controller.dto.response.GetAllSongsResponseDto;
+import com.songifyDatabase.infrastructure.crud.song.controller.dto.response.GetSongResponseDto;
+import com.songifyDatabase.infrastructure.crud.song.controller.dto.response.PartiallyUpdateSongResponseDto;
+import com.songifyDatabase.infrastructure.crud.song.controller.dto.response.UpdateSongResponseDto;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;

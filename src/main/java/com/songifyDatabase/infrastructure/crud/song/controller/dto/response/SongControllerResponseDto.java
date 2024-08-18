@@ -1,4 +1,4 @@
-package com.songifyDatabase.infrastructure.crud.controller.dto.response;
+package com.songifyDatabase.infrastructure.crud.song.controller.dto.response;
 
 import lombok.Builder;
 //Do ewentualnego zmieniania aby Cotroller Song miał oddzielne DTO od domain

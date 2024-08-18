@@ -1,14 +1,12 @@
 package com.songifyDatabase.domain.crud;
 
-import com.songifyDatabase.domain.crud.util.BaseEntity;
+import com.songifyDatabase.domain.util.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -37,4 +35,8 @@ class Artist extends BaseEntity {
 
     @ManyToMany
     private Set<Album> albums = new HashSet<>();
+
+    Artist(final String name) {
+        this.name = name;
+    }
 }

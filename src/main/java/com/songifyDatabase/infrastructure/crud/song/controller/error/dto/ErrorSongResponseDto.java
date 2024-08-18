@@ -1,4 +1,4 @@
-package com.songifyDatabase.infrastructure.crud.controller.error;
+package com.songifyDatabase.infrastructure.crud.song.controller.error.dto;
 
 import org.springframework.http.HttpStatus;
 

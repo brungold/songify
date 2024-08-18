@@ -1,4 +1,4 @@
-package com.songifyDatabase.infrastructure.crud.controller;
+package com.songifyDatabase.infrastructure.crud.song;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

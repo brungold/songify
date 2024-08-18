@@ -1,4 +1,4 @@
-package com.songifyDatabase.infrastructure.crud.controller.dto.request;
+package com.songifyDatabase.infrastructure.crud.song.controller.dto.request;
 
 public record PartiallyUpdateSongRequestDto(
 

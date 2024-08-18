@@ -1,6 +1,6 @@
 package com.songifyDatabase.domain.crud;
 
-import com.songifyDatabase.domain.crud.util.BaseEntity;
+import com.songifyDatabase.domain.util.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
