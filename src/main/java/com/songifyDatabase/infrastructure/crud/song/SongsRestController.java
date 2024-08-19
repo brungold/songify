@@ -2,6 +2,7 @@ package com.songifyDatabase.infrastructure.crud.song;
 
 import com.songifyDatabase.domain.crud.SongifyCrudFacade;
 import com.songifyDatabase.domain.crud.dto.SongDto;
+import com.songifyDatabase.domain.crud.dto.SongRequestDto;
 import com.songifyDatabase.infrastructure.crud.song.controller.dto.request.CreateSongRequestDto;
 import com.songifyDatabase.infrastructure.crud.song.controller.dto.request.PartiallyUpdateSongRequestDto;
 import com.songifyDatabase.infrastructure.crud.song.controller.dto.request.UpdateSongRequestDto;
@@ -64,9 +65,8 @@ public class SongsRestController {
     }
 
     @PostMapping
-    ResponseEntity<CreateSongResponseDto> postSong(@RequestBody @Valid CreateSongRequestDto request) {
-        SongDto songDto = SongControllerMapper.mapFromCreateSongRequestDtoToSongDto(request);
-        SongDto savedSong = songFacade.addSong(songDto);
+    ResponseEntity<CreateSongResponseDto> postSong(@RequestBody @Valid SongRequestDto request) {
+        SongDto savedSong = songFacade.addSong(request);
         CreateSongResponseDto body = mapFromSongToCreateSongResponseDto(savedSong);
         return ResponseEntity.ok(body);
     }
