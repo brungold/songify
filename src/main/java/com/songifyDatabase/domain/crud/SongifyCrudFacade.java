@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -28,6 +28,7 @@ public class SongifyCrudFacade {
     private final ArtistAdder artistAdder;
     private final GenreAdder genreAdder;
     private final AlbumAdder albumAdder;
+    private final ArtistRetriever artistRetriever;
 
     public ArtistDto addArtist(ArtistRequestDto dto) {
         return artistAdder.addArtist(dto.name());
@@ -45,17 +46,19 @@ public class SongifyCrudFacade {
         return songAdder.addSong(dto);
     }
 
-    public List<SongDto> findAll(final Pageable pageable) {
-        return songRetriever.findAll(pageable)
-                .stream()
-                .map(song -> SongDto.builder()
-                        .id(song.getId())
-                        .name(song.getName())
-                        .build())
-                .collect(Collectors.toList());
+    public Set<ArtistDto> findAllArtists(Pageable pageable){
+        return artistRetriever.findAllArtists(pageable);
     }
 
-    public void updateById(Long id, SongDto newSongDto) {
+    public List<SongDto> findAllSongs(Pageable pageable) {
+        return songRetriever.findAll(pageable);
+    }
+
+    public SongDto findSongDtoById(Long id) {
+        return songRetriever.findSongDtoById(id);
+    }
+
+    public void updateSongById(Long id, SongDto newSongDto) {
         songRetriever.existsById(id);
         // some domain validator
         Song songValidatedAndReadyToUpdate = new Song(newSongDto.name());
@@ -63,7 +66,7 @@ public class SongifyCrudFacade {
         songUpdater.updateById(id, songValidatedAndReadyToUpdate);
     }
 
-    public SongDto updatePartiallyById(Long id, SongDto songFromRequest) {
+    public SongDto updateSongPartiallyById(Long id, SongDto songFromRequest) {
         songRetriever.existsById(id);
         Song songFromDatabase = songRetriever.findSongById(id);
         Song toSave = new Song();
@@ -86,16 +89,8 @@ public class SongifyCrudFacade {
 
     }
 
-    public void deleteById(Long id) {
+    public void deleteSongById(Long id) {
         songRetriever.existsById(id);
         songDeleter.deleteById(id);
-    }
-
-    public SongDto findSongDtoById(Long id) {
-        Song song = songRetriever.findSongById(id);
-        return SongDto.builder()
-                .id(song.getId())
-                .name(song.getName())
-                .build();
     }
 }
