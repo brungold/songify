@@ -1,5 +1,6 @@
 package com.songifyDatabase.domain.crud;
 
+import com.songifyDatabase.domain.crud.dto.GenreDto;
 import com.songifyDatabase.domain.crud.dto.SongDto;
 import com.songifyDatabase.domain.crud.dto.SongLanguageDto;
 import com.songifyDatabase.domain.crud.dto.SongRequestDto;
@@ -25,6 +26,6 @@ class SongAdder {
         Song song = new Song(songDto.name(), songDto.releaseDate(), songDto.duration(), songLanguage);
         log.info("adding new song: " + song);
         Song save = songRepository.save(song);
-        return new SongDto(save.getId(), save.getName());
+        return new SongDto(save.getId(), save.getName(), new GenreDto(save.getGenre().getId(), save.getGenre().getName()));
     }
 }
