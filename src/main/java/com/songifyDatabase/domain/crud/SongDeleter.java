@@ -13,10 +13,19 @@ import org.springframework.stereotype.Service;
 class SongDeleter {
     private final SongRepository songRepository;
     private final SongRetriever songRetriever;
+    private final GenreDeleter genreDeleter;
+
 
     void deleteById(Long id) {
-        songRetriever.existsById(id);
         log.info("deleting song by id: " + id);
         songRepository.deleteById(id);
     }
+
+//    void deleteSongAndGenreById(final Long songId) {
+//        Song songById = songRetriever.findSongById(songId);
+//        Long genreId = songById.getGenre().getId();
+//
+//        deleteById(songId);
+//        genreDeleter.deleteById(genreId);
+//    }
 }

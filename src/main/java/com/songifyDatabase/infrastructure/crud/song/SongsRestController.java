@@ -94,4 +94,11 @@ public class SongsRestController {
         PartiallyUpdateSongResponseDto body = SongControllerMapper.mapFromSongDtoToPartiallyUpdateSongResponseDto(savedSong);
         return ResponseEntity.ok(body);
     }
+
+    //    @DeleteMapping("/{id}/genre")
+//    ResponseEntity<DeleteSongResponseDto> deleteSongWithGenre(@PathVariable Long id) {
+//        songFacade.deleteSongAndGenreById(id);
+//        DeleteSongResponseDto body = mapFromSongToDeleteSongResponseDto(id);
+//        return ResponseEntity.ok(body);
+//    }
 }
