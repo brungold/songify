@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
-import java.util.stream.Collectors;
+
 
 @Service
 @AllArgsConstructor
@@ -17,10 +17,14 @@ class AlbumRetriever {
 
     private final AlbumRepository albumRepository;
 
+    Set<Album> findAlbumsByArtistId(final Long artistId) {
+        return albumRepository.findAllAlbumsByArtistId(artistId);
+    }
+
     AlbumInfo findAlbumByIdWithArtistsAndSongs(final Long id) {
         return albumRepository.findAlbumByIdWithSongsAndArtists(id)
                 .orElseThrow(() -> new AlbumNotFoundException("Album with id: " + id + " not found"));
-
+    }
 //    AlbumDtoWithArtistsAndSongs findAlbumByIdWithArtistsAndSongs(final Long id) {
 //        Album album = albumRepository.findAlbumByIdWithSongsAndArtists(id)
 //                .orElseThrow(() -> new AlbumNotFoundException("Album with id: " + id + " not found."));
@@ -50,4 +54,4 @@ class AlbumRetriever {
 //                songsDto
 //        );
     }
-}
+
