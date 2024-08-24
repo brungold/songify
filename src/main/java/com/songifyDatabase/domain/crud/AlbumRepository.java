@@ -12,6 +12,8 @@ import java.util.Set;
 
 interface AlbumRepository extends Repository<Album, Long> {
 
+    Optional<Album> findById(Long albumId);
+
     @Modifying
     @Query("delete from Album a where a.id in :ids")
     int deleteByIdIn(Collection<Long> ids);
@@ -35,6 +37,5 @@ interface AlbumRepository extends Repository<Album, Long> {
             where artists.id = :id
             """)
     Set<Album> findAllAlbumsByArtistId(@Param("id") Long id);
-
 
 }

@@ -25,6 +25,11 @@ class AlbumRetriever {
         return albumRepository.findAlbumByIdWithSongsAndArtists(id)
                 .orElseThrow(() -> new AlbumNotFoundException("Album with id: " + id + " not found"));
     }
+
+    Album findById(final Long albumId) {
+        return albumRepository.findById(albumId)
+                .orElseThrow(() -> new AlbumNotFoundException("Album with id: " + albumId + " not found"));
+    }
 //    AlbumDtoWithArtistsAndSongs findAlbumByIdWithArtistsAndSongs(final Long id) {
 //        Album album = albumRepository.findAlbumByIdWithSongsAndArtists(id)
 //                .orElseThrow(() -> new AlbumNotFoundException("Album with id: " + id + " not found."));
