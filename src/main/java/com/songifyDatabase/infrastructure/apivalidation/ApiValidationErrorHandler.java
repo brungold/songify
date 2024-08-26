@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 // ContollerAdvice wyższy poziom obsługiwania błędu
-@ControllerAdvice(assignableTypes = SongsRestController.class)
+@ControllerAdvice //(assignableTypes = SongsRestController.class)
 class ApiValidationErrorHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
