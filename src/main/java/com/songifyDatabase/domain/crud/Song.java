@@ -46,7 +46,7 @@ class Song extends BaseEntity {
 
     private Long duration;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToOne//(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Genre genre;
 
 

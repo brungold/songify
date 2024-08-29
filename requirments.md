@@ -24,6 +24,7 @@ SONGIFY: APLIKACJA DO ZARZĄDZANIA ALBUMAMI, ARTYSTAMI I PIOSENKAMI
 ~~21. można wyświetlać konkretne albumy z artystami oraz piosenkami w albumie~~
 22. można wyświetlać konkretne gatunki muzyczne wraz z piosenkami
 23. można wyświetlać konkretnych artystów wraz z ich albumami
+24. można dodać artystę od razu z albumem (domyślne wartości)
 
 HAPPY PATH (user tworzy album "Eminema" z piosenkami "Til i collapse", "Lose Yourself", o gatunku Rap)
 //given
