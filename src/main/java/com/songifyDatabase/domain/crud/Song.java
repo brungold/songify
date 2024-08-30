@@ -10,6 +10,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -22,12 +23,18 @@ import lombok.Setter;
 import java.time.Instant;
 
 @Builder
-@Entity
 @Getter
+@Entity
 @Setter
-@Table(name = "song")
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(
+        indexes =
+                {@Index(
+                        name = "idx_song_name",
+                        columnList = "name"
+                )}
+)
 class Song extends BaseEntity {
 
     @Id
@@ -45,14 +52,12 @@ class Song extends BaseEntity {
     private Instant releaseDate;
 
     private Long duration;
-
-    @OneToOne//(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    //(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Genre genre;
-
 
     @Enumerated(EnumType.STRING)
     private SongLanguage language;
-
 
     public Song(String name) {
         this.name = name;
