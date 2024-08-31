@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 class SongUpdater {
     private final SongRepository songRepository;
-    private final SongRetriever songRetriever;
+    //private final SongRetriever songRetriever;
 
     void updateById(Long id, Song newSong) {
         songRepository.updateById(id, newSong);

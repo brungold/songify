@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public interface SongRepository extends Repository<Song, Long> {
+interface SongRepository extends Repository<Song, Long> {
 
     @Modifying
     @Query("delete from Song s where s.id in :ids")

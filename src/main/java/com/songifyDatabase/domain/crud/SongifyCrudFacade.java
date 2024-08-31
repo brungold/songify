@@ -23,10 +23,10 @@ import java.util.Set;
 @Transactional
 public class SongifyCrudFacade {
 
-    private final SongAdder songAdder;
     private final SongRetriever songRetriever;
-    private final SongDeleter songDeleter;
     private final SongUpdater songUpdater;
+    private final SongDeleter songDeleter;
+    private final SongAdder songAdder;
     private final ArtistAdder artistAdder;
     private final GenreAdder genreAdder;
     private final AlbumAdder albumAdder;
