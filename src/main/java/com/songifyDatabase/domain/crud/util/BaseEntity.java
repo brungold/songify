@@ -1,4 +1,4 @@
-package com.songifyDatabase.domain.util;
+package com.songifyDatabase.domain.crud.util;
 
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Version;

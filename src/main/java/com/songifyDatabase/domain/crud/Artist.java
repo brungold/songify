@@ -1,6 +1,6 @@
 package com.songifyDatabase.domain.crud;
 
-import com.songifyDatabase.domain.util.BaseEntity;
+import com.songifyDatabase.domain.crud.util.BaseEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -2,10 +2,18 @@ package com.songifyDatabase.domain.crud;
 
 import org.springframework.data.domain.Pageable;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 class InMemoryArtistRepository implements ArtistRepository{
+
+    Map<Long, Artist> db = new HashMap<>();
+    AtomicInteger index = new AtomicInteger(0);
+
     @Override
     public int deleteById(final Long id) {
         return 0;
@@ -13,7 +21,10 @@ class InMemoryArtistRepository implements ArtistRepository{
 
     @Override
     public Artist save(final Artist artist) {
-        return null;
+        long index = this.index.getAndIncrement();
+        db.put(index, artist);
+        artist.setId(index);
+        return artist;
     }
 
     @Override
