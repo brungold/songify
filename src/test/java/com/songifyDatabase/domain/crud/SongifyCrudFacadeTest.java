@@ -19,7 +19,7 @@ class SongifyCrudFacadeTest {
 
 
     @Test
-    public void test() {
+    public void should_add_artist() {
         // given
         ArtistRequestDto artist = ArtistRequestDto.builder()
                 .name("shaw mendes")
@@ -29,7 +29,22 @@ class SongifyCrudFacadeTest {
         ArtistDto result = songifyCrudFacade.addArtist(artist);
 
         // then
-        assert result.id().equals(0L);
-        assert result.name().equals("shaw mendes");
+        assertThat(result.id()).isEqualTo(0L);
+        assertThat(result.name()).isEqualTo("shaw mendes");
+    }
+
+    @Test
+    public void should_return_correct_dto() {
+        // given
+        ArtistRequestDto artist = ArtistRequestDto.builder()
+                .name("shaw mendes")
+                .build();
+
+        // when
+        ArtistDto result = songifyCrudFacade.addArtist(artist);
+
+        // then
+        assertThat(result.id()).isNotNull();
+        assertThat(result.name()).isNotNull();
     }
 }
