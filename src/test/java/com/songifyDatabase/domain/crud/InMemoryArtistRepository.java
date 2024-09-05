@@ -18,7 +18,8 @@ class InMemoryArtistRepository implements ArtistRepository{
 
     @Override
     public int deleteById(final Long id) {
-        return 0;
+        db.remove(id);
+        return id.intValue();
     }
 
     @Override

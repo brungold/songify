@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -19,6 +20,14 @@ class AlbumRetriever {
 
     Set<Album> findAlbumsByArtistId(final Long artistId) {
         return albumRepository.findAllAlbumsByArtistId(artistId);
+    }
+
+    Set<AlbumDto> findAlbumsDtoByArtistId(final Long artistId) {
+        return findAlbumsByArtistId(artistId)
+                .stream()
+                .map(album -> new AlbumDto(album.getId(), album.getTitle()))
+                .collect(Collectors.toSet());
+
     }
 
     AlbumInfo findAlbumByIdWithArtistsAndSongs(final Long id) {
@@ -58,5 +67,5 @@ class AlbumRetriever {
 //                artistsDto,
 //                songsDto
 //        );
-    }
+}
 
