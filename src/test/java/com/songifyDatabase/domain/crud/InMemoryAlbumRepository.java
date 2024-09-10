@@ -35,7 +35,9 @@ class InMemoryAlbumRepository implements AlbumRepository {
 
     @Override
     public Optional<AlbumInfo> findAlbumByIdWithSongsAndArtists(Long id) {
-        return Optional.empty();
+        Album album = db.get(id);
+        AlbumInfoTestImpl albumInfoTest = new AlbumInfoTestImpl(album);
+        return Optional.of(albumInfoTest);
     }
 
     @Override
@@ -44,5 +46,10 @@ class InMemoryAlbumRepository implements AlbumRepository {
                 .filter(album -> album.getArtists().stream()
                         .anyMatch(artist -> artist.getId().equals(id)))
                 .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<Album> findAll() {
+        return new HashSet<>(db.values());
     }
 }

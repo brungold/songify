@@ -53,6 +53,13 @@ class AlbumRetriever {
                 album.getTitle()
         );
     }
+
+    Set<AlbumDto> findAll() {
+        return albumRepository.findAll()
+                .stream()
+                .map(album -> new AlbumDto(album.getId(), album.getTitle()))
+                .collect(Collectors.toSet());
+    }
 //    AlbumDtoWithArtistsAndSongs findAlbumByIdWithArtistsAndSongs(final Long id) {
 //        Album album = albumRepository.findAlbumByIdWithSongsAndArtists(id)
 //                .orElseThrow(() -> new AlbumNotFoundException("Album with id: " + id + " not found."));
