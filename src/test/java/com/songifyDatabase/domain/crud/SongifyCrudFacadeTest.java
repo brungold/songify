@@ -166,8 +166,37 @@ class SongifyCrudFacadeTest {
     }
 
     @Test
+    @DisplayName("Should add artist to album")
     public void should_add_artist_to_album() {
-        //TODO
+        //given
+        ArtistRequestDto shawMendes = ArtistRequestDto.builder()
+                .name("shaw mendes")
+                .build();
+        Long artistId = songifyCrudFacade.addArtist(shawMendes).id();
+        assertThat(songifyCrudFacade.findAlbumsByArtistId(artistId)).isEmpty();
+
+        SongRequestDto songRequestDto = SongRequestDto.builder()
+                .name("song1")
+                .language(SongLanguageDto.ENGLISH)
+                .build();
+        SongDto songDto = songifyCrudFacade.addSong(songRequestDto);
+        Long songId = songDto.id();
+
+        AlbumDto album = songifyCrudFacade.addAlbumWithSong(AlbumRequestDto.builder()
+                .songId(songId)
+                .title("album title 1")
+                .build());
+        Long albumId = album.id();
+        assertThat(songifyCrudFacade.findAlbumsByArtistId(artistId)).isEmpty();
+        //when
+        songifyCrudFacade.addArtistToAlbum(artistId, albumId);
+        //then
+        //assertThat(songifyCrudFacade.findAlbumsByArtistId(artistId)).isNotEmpty();
+        assertThat(songifyCrudFacade.findAlbumsByArtistId(artistId)).isEqualTo(Set.of(new AlbumDto(0L, "album title 1")));
+        Set<AlbumDto> albumsByArtistId = songifyCrudFacade.findAlbumsByArtistId(artistId);
+        assertThat(albumsByArtistId)
+                .extracting(album1 -> album.id())
+                .containsExactly(0L);
     }
 
     @Test
