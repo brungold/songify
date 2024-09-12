@@ -1,7 +1,6 @@
 package com.songifyDatabase.domain.crud;
 
 import com.songifyDatabase.domain.crud.dto.*;
-import org.glassfish.jaxb.core.v2.TODO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Pageable;
@@ -104,12 +103,11 @@ class SongifyCrudFacadeTest {
         assertThat(songifyCrudFacade.findAllArtists(Pageable.unpaged())).isEmpty();
         Throwable throwable = catchThrowable(() -> songifyCrudFacade.findSongDtoById(songId));
         assertThat(throwable).isInstanceOf(SongNotFoundException.class);
-        assertThat(throwable.getMessage()).isEqualTo("Song with id 0 not found");
+        assertThat(throwable.getMessage()).isEqualTo("Song with id: 0 not found");
         Throwable throwable2 = catchThrowable(() -> songifyCrudFacade.findAlbumById(albumId));
         assertThat(throwable2).isInstanceOf(AlbumNotFoundException.class);
         assertThat(throwable2.getMessage()).isEqualTo("Album with id: 0 not found");
     }
-
 
 
     @Test
@@ -227,21 +225,72 @@ class SongifyCrudFacadeTest {
     }
 
     @Test
+    @DisplayName("Should throw exception When album not found by id")
     public void should_throw_exception_When_album_not_found_by_id() {
-        //TODO
+        //given
+        assertThat(songifyCrudFacade.findAllAlbums()).isEmpty();
+        //when
+        Throwable throwable = catchThrowable(() -> songifyCrudFacade.findAlbumById(1L));
+        //then
+        assertThat(throwable).isInstanceOf(AlbumNotFoundException.class);
+        assertThat(throwable.getMessage()).isEqualTo("Album with id: 1 not found");
     }
 
     @Test
+    @DisplayName("Should throw exception When song not found by id")
     public void should_throw_exception_When_song_not_found_by_id() {
         //TODO
+        //given
+        assertThat(songifyCrudFacade.findAllSongs(Pageable.unpaged())).isEmpty();
+        //when
+        Throwable throwable = catchThrowable(() -> songifyCrudFacade.findSongDtoById(1L));
+        //then
+        assertThat(throwable).isInstanceOf(SongNotFoundException.class);
+        assertThat(throwable.getMessage()).isEqualTo("Song with id: 1 not found");
     }
 
     @Test
     @DisplayName("Should delete only artist from album by id When there were more than 1 artist in album")
     public void should_delete_only_artist_from_album_by_id_when_there_were_more_than_one_artist_in_album() {
-//        assertThat(songifyCrudFacade.findAlbumByIdWithArtistsAndSongs(albumId)
-//                .getArtists()
-//                .size()).isGreaterThanOrEqualTo(2);
+        //given
+        ArtistRequestDto shawMendes = ArtistRequestDto.builder()
+                .name("shaw mendes")
+                .build();
+        ArtistRequestDto camilaCabello = ArtistRequestDto.builder()
+                .name("camila cabello")
+                .build();
+
+        Long artistId1 = songifyCrudFacade.addArtist(shawMendes).id();
+        Long artistId2 = songifyCrudFacade.addArtist(camilaCabello).id();
+
+        SongRequestDto song = SongRequestDto
+                .builder()
+                .name("Seniorita")
+                .language(SongLanguageDto.ENGLISH)
+                .build();
+        SongDto songDto = songifyCrudFacade.addSong(song);
+        Long songId = songDto.id();
+
+        AlbumDto albumDto = songifyCrudFacade.addAlbumWithSong(AlbumRequestDto
+                .builder()
+                .songId(songId)
+                .title("album title 1")
+                .build());
+
+        Long albumId = albumDto.id();
+        songifyCrudFacade.addArtistToAlbum(artistId1, albumId);
+        songifyCrudFacade.addArtistToAlbum(artistId2, albumId);
+
+        assertThat(songifyCrudFacade.countArtistsByAlbumId(albumId)).isEqualTo(2L);
+
+        //when
+        songifyCrudFacade.deleteArtistByIdWithAlbumsAndSongs(artistId1);
+        //then
+        AlbumInfo album = songifyCrudFacade.findAlbumByIdWithArtistsAndSongs(albumId);
+        Set<AlbumInfo.ArtistInfo> artists = album.getArtists();
+        assertThat(artists)
+                .extracting("id")
+                .containsOnly(artistId2);
     }
 
     @Test

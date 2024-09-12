@@ -29,7 +29,7 @@ class SongRetriever {
 
     Song findSongById(Long id) {
         return songRepository.findById(id)
-                .orElseThrow(() -> new SongNotFoundException("Song with id " + id + " not found"));
+                .orElseThrow(() -> new SongNotFoundException("Song with id: " + id + " not found"));
     }
 
     SongDto findSongDtoById(Long id) {
@@ -38,12 +38,12 @@ class SongRetriever {
                         .id(song.getId())
                         .name(song.getName())
                         .build())
-                .orElseThrow(() -> new SongNotFoundException("Song with id " + id + " not found"));
+                .orElseThrow(() -> new SongNotFoundException("Song with id: " + id + " not found"));
     }
 
     void existsById(Long id) {
         if (!songRepository.existsById(id)) {
-            throw new SongNotFoundException("Song with id " + id + " not found");
+            throw new SongNotFoundException("Song with id: " + id + " not found");
         }
     }
 }

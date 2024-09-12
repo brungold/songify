@@ -29,22 +29,7 @@ class ArtistDeleter {
             return;
         }
 
-        /*
-        // czy album nalezy tylko do jednego artysty (tylko jego album)
-        Set<Album> albumsWithMoreThanOneArtist = artistAlbums.stream()
-                .filter(album -> album.getArtists().size() >= 2)
-                .collect(Collectors.toSet());
-        //z albumów zwierających dwóch lub więcej z tym artystą usuwamy tylko tego artystę
-        albumsWithMoreThanOneArtist
-                .forEach(album -> album.removeArtist(artist));
-         */
-        //UPROSZCZENIE POWYŻSZYCH DWÓCH STREAMÓW
-        //odfiltruj mi albumy w którym jest ewięcej niż 2 artystów i usuń tego konkretnego artystę
-        artistAlbums.stream()
-                .filter(album -> album.getArtists().size() >= 2)
-                .forEach(album -> album.removeArtist(artist));
-
-        // mam pewność ze dojednego albumy był przypiisany jeden artysta
+        // mam pewność ze do jednego albumy był przypiisany jeden artysta
         Set<Album> albumWithOnlyOneArtist = artistAlbums.stream()
                 .filter(album -> album.getArtists().size() == 1)
                 .collect(Collectors.toSet());
@@ -64,7 +49,21 @@ class ArtistDeleter {
 
         albumDeleter.deleteAllAlbumsById(albumsIdsToDelete);
 
-        artistRepository.deleteById(artistId);
+         /*
+        // czy album nalezy tylko do jednego artysty (tylko jego album)
+        Set<Album> albumsWithMoreThanOneArtist = artistAlbums.stream()
+                .filter(album -> album.getArtists().size() >= 2)
+                .collect(Collectors.toSet());
+        //z albumów zwierających dwóch lub więcej z tym artystą usuwamy tylko tego artystę
+        albumsWithMoreThanOneArtist
+                .forEach(album -> album.removeArtist(artist));
+         */
+        //UPROSZCZENIE POWYŻSZYCH DWÓCH STREAMÓW
+        //odfiltruj mi albumy w którym jest ewięcej niż 2 artystów i usuń tego konkretnego artystę
+        artistAlbums.stream()
+                .filter(album -> album.getArtists().size() >= 2)
+                .forEach(album -> album.removeArtist(artist));
 
+        artistRepository.deleteById(artistId);
     }
 }
