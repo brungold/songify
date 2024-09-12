@@ -200,9 +200,32 @@ class SongifyCrudFacadeTest {
     }
 
     @Test
+    @DisplayName("Should return album by id")
     public void should_return_album_by_id() {
-        //TODO
+        //given
+        SongRequestDto songRequestDto = SongRequestDto.builder()
+                .name("song1")
+                .language(SongLanguageDto.ENGLISH)
+                .build();
+        SongDto songDto = songifyCrudFacade.addSong(songRequestDto);
+        Long songId = songDto.id();
+
+        assertThat(songifyCrudFacade.findAllAlbums()).isEmpty();
+
+        AlbumDto albumDto = songifyCrudFacade.addAlbumWithSong(AlbumRequestDto
+                .builder()
+                .songId(songId)
+                .title("album title 1")
+                .build());
+        Long albumId = albumDto.id();
+        assertThat(songifyCrudFacade.findAllAlbums()).isNotEmpty();
+        //when
+        AlbumDto albumById = songifyCrudFacade.findAlbumById(albumId);
+        //then
+        assertThat(albumById)
+                .isEqualTo(new AlbumDto(albumId, "album title 1"));
     }
+
     @Test
     public void should_throw_exception_When_album_not_found_by_id() {
         //TODO

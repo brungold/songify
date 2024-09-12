@@ -7,7 +7,7 @@ import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class AlbumInfoTestImpl implements AlbumInfo {
+class AlbumInfoTestImpl implements AlbumInfo {
 
     private final Album album;
 

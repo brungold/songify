@@ -4,7 +4,7 @@ import com.songifyDatabase.domain.crud.dto.AlbumInfo;
 
 import java.time.Instant;
 
-public class SongInfoTestImpl implements AlbumInfo.SongInfo {
+class SongInfoTestImpl implements AlbumInfo.SongInfo {
 
     private final Song song;
 

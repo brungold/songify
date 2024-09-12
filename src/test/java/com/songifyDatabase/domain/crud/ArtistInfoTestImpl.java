@@ -2,7 +2,7 @@ package com.songifyDatabase.domain.crud;
 
 import com.songifyDatabase.domain.crud.dto.AlbumInfo;
 
-public class ArtistInfoTestImpl implements AlbumInfo.ArtistInfo {
+class ArtistInfoTestImpl implements AlbumInfo.ArtistInfo {
 
     private final Artist artist;
 

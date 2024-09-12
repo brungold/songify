@@ -2,7 +2,7 @@ package com.songifyDatabase.domain.crud;
 
 import com.songifyDatabase.domain.crud.dto.AlbumInfo;
 
-public class GenreInfoTestImpl implements AlbumInfo.SongInfo.GenreInfo {
+class GenreInfoTestImpl implements AlbumInfo.SongInfo.GenreInfo {
 
     private final Genre genre;
 
