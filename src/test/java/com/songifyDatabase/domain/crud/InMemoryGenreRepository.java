@@ -2,6 +2,7 @@ package com.songifyDatabase.domain.crud;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 class InMemoryGenreRepository implements GenreRepository{
@@ -24,5 +25,11 @@ class InMemoryGenreRepository implements GenreRepository{
         db.put(index, genre);
         genre.setId(index);
         return genre;
+    }
+
+    @Override
+    public Optional<Genre> findById(Long id) {
+        Genre genre = db.get(id);
+        return Optional.ofNullable(genre);
     }
 }

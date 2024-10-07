@@ -19,6 +19,7 @@ import java.time.Instant;
 class SongAdder {
 
     private final SongRepository songRepository;
+    private final GenreAssigner genreAssigner;
 
 
     SongDto addSong(final SongRequestDto songDto) {
@@ -27,6 +28,7 @@ class SongAdder {
         Song song = new Song(songDto.name(), songDto.releaseDate(), songDto.duration(), songLanguage);
         log.info("adding new song: " + song);
         Song save = songRepository.save(song);
+        genreAssigner.assignDefaultGenreToSong(song.getId());
         return new SongDto(save.getId(), save.getName(), new GenreDto(save.getGenre().getId(), save.getGenre().getName()));
     }
 
