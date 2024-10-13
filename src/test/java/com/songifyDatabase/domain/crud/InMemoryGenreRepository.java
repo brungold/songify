@@ -1,8 +1,6 @@
 package com.songifyDatabase.domain.crud;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 class InMemoryGenreRepository implements GenreRepository{
@@ -31,5 +29,10 @@ class InMemoryGenreRepository implements GenreRepository{
     public Optional<Genre> findById(Long id) {
         Genre genre = db.get(id);
         return Optional.ofNullable(genre);
+    }
+
+    @Override
+    public Set<Genre> findAll() {
+        return new HashSet<>(db.values());
     }
 }

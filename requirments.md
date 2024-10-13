@@ -53,8 +53,8 @@ HAPPY PATH V2 (after refactoring)
 
 1. when I go to /songs then I can see no songs
 2. when I post to /songs with Song "Till i collapse" then Song "Til i collapse" is returned with id 1
-3. when I post to /song with Song "Lose Yourself" then Song "Lose Yourself" is returned with id 2
-4. when I go to /genre then I can see only default genre with id 1
+3. when I post to /songs with Song "Lose Yourself" then Song "Lose Yourself" is returned with id 2
+4. when I go to /genres then I can see only default genre with id 1
 5. when I post to /genre with Genre "Rap" then Genre "Rap" is returned with id 2
 6. when I go to /song/1 then I can see default genre with id 1 and name default
 7. when I put to /song/1/genre/1 then Genre with id 2 ("Rap") is added to Song with id 1 ("Til i collapse")
