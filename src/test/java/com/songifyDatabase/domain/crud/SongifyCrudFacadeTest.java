@@ -40,6 +40,24 @@ class SongifyCrudFacadeTest {
     }
 
     @Test
+    @DisplayName("Should retrieve song with genre by id")
+    public void should_retrieve_song_by_id() {
+        // given
+        SongRequestDto songRequestDto = SongRequestDto.builder()
+                .name("song1")
+                .language(SongLanguageDto.ENGLISH)
+                .build();
+        SongDto songDto = songifyCrudFacade.addSong(songRequestDto);
+        // when
+        SongDto songDtoById = songifyCrudFacade.findSongDtoById(songDto.id());
+        // then
+        assertThat(songDtoById.id()).isEqualTo(0L);
+        assertThat(songDtoById.name()).isEqualTo("song1");
+        assertThat(songDtoById.genre().id()).isEqualTo(1L);
+        assertThat(songDtoById.genre().name()).isEqualTo("default");
+    }
+
+    @Test
     @DisplayName("Should throw exception ArtistNotFound When id was: 0")
     public void should_throw_exception_artist_not_found_when_id_was_zero() {
         // given
