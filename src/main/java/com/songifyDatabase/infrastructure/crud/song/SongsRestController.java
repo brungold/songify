@@ -95,6 +95,14 @@ public class SongsRestController {
         return ResponseEntity.ok(body);
     }
 
+    @PutMapping("/{songId}/genres/{genreId}")
+    ResponseEntity<String> assignGenreToSong(@PathVariable Long songId,
+                                             @PathVariable Long genreId){
+        songFacade.assignGenreToSong(genreId, songId);
+        return ResponseEntity.ok("updated");
+    }
+
+
     //    @DeleteMapping("/{id}/genre")
 //    ResponseEntity<DeleteSongResponseDto> deleteSongWithGenre(@PathVariable Long id) {
 //        songFacade.deleteSongAndGenreById(id);

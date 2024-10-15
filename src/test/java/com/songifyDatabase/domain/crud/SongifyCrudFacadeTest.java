@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Set;
 
+import static java.util.Collections.emptySet;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -206,8 +207,7 @@ class SongifyCrudFacadeTest {
         //when
         songifyCrudFacade.addArtistToAlbum(artistId, albumId);
         //then
-        //assertThat(songifyCrudFacade.findAlbumsByArtistId(artistId)).isNotEmpty();
-        assertThat(songifyCrudFacade.findAlbumsByArtistId(artistId)).isEqualTo(Set.of(new AlbumDto(0L, "album title 1")));
+        assertThat(songifyCrudFacade.findAlbumsByArtistId(artistId)).isEqualTo(Set.of(new AlbumDto(0L, "album title 1", Set.of(songId))));
         Set<AlbumDto> albumsByArtistId = songifyCrudFacade.findAlbumsByArtistId(artistId);
         assertThat(albumsByArtistId)
                 .extracting(album1 -> album.id())
@@ -238,7 +238,7 @@ class SongifyCrudFacadeTest {
         AlbumDto albumById = songifyCrudFacade.findAlbumById(albumId);
         //then
         assertThat(albumById)
-                .isEqualTo(new AlbumDto(albumId, "album title 1"));
+                .isEqualTo(new AlbumDto(albumId, "album title 1", Set.of(songId)));
     }
 
     @Test
