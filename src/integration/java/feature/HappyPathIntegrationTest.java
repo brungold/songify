@@ -171,14 +171,45 @@ public class HappyPathIntegrationTest {
 
 //  11. when I go to /albums/1 then I can not see any albums because there is no artist in system
         mockMvc.perform(get("/albums/1")
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-        )
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                )
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.message", is("Album with id: 1 not found")))
                 .andExpect(jsonPath("$.status", is("NOT_FOUND")));
 //  12. when I post to /artists with Artist "Eminem" then Artist "Eminem" is returned with id 1
-//  13. when I put to /artists/1/albums/2 then Artist with id 1 ("Eminem") is added to Album with id 1 ("EminemAlbum1")
+        mockMvc.perform(post("/artists")
+                        .content("""
+                                {
+                                  "name": "Eminem"
+                                }
+                                """.trim())
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.name", is("Eminem")));
+//  13. when I put to /artists/1/albums/1 then Artist with id 1 ("Eminem") is added to Album with id 1 ("EminemAlbum1")
+        mockMvc.perform(put("/artists/1/1")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", is("probably assigned artist to album.")));
 //  14. when I go to /albums/1 then I can see album with single song with id 1 and single artist with id 1
+        mockMvc.perform(get("/albums/1")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.releaseDate", is("2024-10-14T13:55:21.850Z")))
+                .andExpect(jsonPath("$.title", is("EminemAlbum1")))
+                .andExpect(jsonPath("$.artists[0].name", is("Eminem")))
+                .andExpect(jsonPath("$.artists[0].id", is(1)))
+                .andExpect(jsonPath("$.songs[0].id", is(1)))
+                .andExpect(jsonPath("$.songs[0].name", is("Till i collapse")));
+        //prostsza wersja - któryś z id który tam jest jest równe 1
+                //.andExpect(jsonPath("$.songs[*].id", containsInAnyOrder(1)))
+                //.andExpect(jsonPath("$.artists[*].id", containsInAnyOrder(1)));
+
 //  15. when I put to /albums/1/songs/2 then Song with id 2 ("Lose Yourself") is added to Album with id 1 ("EminemAlbum1")
 //  16. when I go to /albums/1 then I can see album with 2 songs (id1 and id2)
     }
