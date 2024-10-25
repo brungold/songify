@@ -1,0 +1,3 @@
+###
+GET http://localhost:8080/songs
+Authorization: Basic user 044a5cff-46d6-4e66-b290-1d28e3c564d0

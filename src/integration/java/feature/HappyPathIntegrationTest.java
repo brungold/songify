@@ -39,7 +39,7 @@ public class HappyPathIntegrationTest {
     }
 
     @Test
-    public void f() throws Exception {
+    public void happy_path() throws Exception {
 //  1. when I go to /songs then I can see no songs
         ResultActions getSongsResult = mockMvc.perform(get("/songs")
                 .contentType(MediaType.APPLICATION_JSON)
