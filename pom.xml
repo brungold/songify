@@ -81,12 +81,18 @@
             <version>1.17.4</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>4.0.0</version>
+        </dependency>
         <!--  SWAGGER -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>${swagger.version}</version>
         </dependency>
+
         <!--        <dependency>-->
         <!--            <groupId>org.springdoc</groupId>-->
         <!--            <artifactId>springdoc-openapi-ui</artifactId>-->
