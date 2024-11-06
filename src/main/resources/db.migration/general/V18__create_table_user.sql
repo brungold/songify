@@ -4,5 +4,6 @@ CREATE TABLE users
     email       VARCHAR(255) NOT NULL,
     password    VARCHAR(255) NOT NULL,
     authorities TEXT[],
+    confirmation_token VARCHAR(255),
     enabled     BOOLEAN      NOT NULL
 );

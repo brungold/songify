@@ -30,14 +30,23 @@ public class User extends BaseEntity {
 
     private String password;
 
-    private boolean enabled = true;
+    private String confirmationToken;
 
+    private boolean enabled = false;
+
+    @ElementCollection
     private Collection<String> authorities = new HashSet<>();
 
-    public User(String email, String password, boolean enabled, Collection<String> authorities) {
+    public boolean confirm(){
+        this.setEnabled(true);
+        this.setConfirmationToken(null);
+        return true;
+    }
+
+    public User(String email, String password, String confirmationToken, Collection<String> authorities) {
         this.email = email;
         this.password = password;
-        this.enabled = enabled;
+        this.confirmationToken = confirmationToken;
         this.authorities = authorities;
     }
 }

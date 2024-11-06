@@ -1,5 +1,6 @@
 package com.songifyDatabase.infrastructure.security;
 
+import com.songifyDatabase.domain.usercrud.UserConformer;
 import com.songifyDatabase.domain.usercrud.UserRepository;
 import com.songifyDatabase.infrastructure.security.jwt.JwtAuthTokenFilter;
 import org.springframework.context.annotation.Bean;
@@ -25,8 +26,8 @@ import java.util.List;
 public class SecurityConfig {
 
     @Bean
-    public UserDetailsManager userDetailsService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        return new UserDetailsServiceImpl(userRepository, passwordEncoder);
+    public UserDetailsManager userDetailsService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserConformer userConformer) {
+        return new UserDetailsServiceImpl(userRepository, passwordEncoder, userConformer);
     }
 
     @Bean
@@ -71,6 +72,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.PUT, "/albums/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/genres/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/users/**").hasRole("ADMIN")
+                .requestMatchers("/users/confirm/**").permitAll()
                 .anyRequest().authenticated());
         return http.build();
     }
